@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Raleway:wght@300;400;600&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Raleway', sans-serif;
+    background: #F6F4EF;
+    color: #392B21;
+}
+
+header {
+    background: #FFFFFF;
+    border-bottom: 1px solid #e8e2da;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+header h1 {
+    margin: 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    color: #D84171;
+    font-weight: 600;
+}
+
+nav a {
+    margin-left: 1.5rem;
+    text-decoration: none;
+    color: #392B21;
+    font-weight: 400;
+}
+
+nav a.active {
+    opacity: 0.6;
+}
+
+main {
+    padding: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    color: #392B21;
+    margin-bottom: 1rem;
+}
+
+/* Buttons */
+
+.btn {
+    padding: 1rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.pink {
+    background: #D84171;
+    color: white;
+}
+
+.dark {
+    background: #392B21;
+    color: white;
+}
+
+/* Forms */
+
+.form-group {
+    margin-bottom: 1.5rem;
+    max-width: 400px;
+}
+
+select {
+    width: 100%;
+    padding: .5rem;
+}
+
+/* Output box */
+
+.output-box {
+    white-space: pre-line;
+    background: white;
+    border: 1px solid #e8e2da;
+    padding: 1.5rem;
+    border-radius: 8px;
+    line-height: 1.6;
+    max-width: 700px;
+    margin-top: 1rem;
+}
+
+/* Seasonal items */
+
+.seasonal-list {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.season-item {
+    background: white;
+    padding: 1.2rem 1.5rem;
+    border-radius: 8px;
+    border: 1px solid #e8e2da;
+}
+
+.season-item h3 {
+    margin: 0;
+    color: #D84171;
+    font-family: 'Cormorant Garamond', serif;
+}
