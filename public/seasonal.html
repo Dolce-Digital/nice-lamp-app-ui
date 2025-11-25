@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Seasonal Packs – Nice-Lamp</title>
+	<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header>
+	<h1>Nice-Lamp</h1>
+	<nav>
+		<a href="index.html">Home</a>
+		<a href="email.html">Create Email</a>
+		<a href="seasonal.html" class="active">Seasonal Packs</a>
+	</nav>
+</header>
+
+<main>
+	<h2>Seasonal Inspiration Packs 🍃</h2>
+
+	<p>Select a season to explore curated highlights your hotel can use in newsletters, social posts, or upsell ideas.</p>
+
+	<div class="form-group">
+		<label>Select season</label>
+		<select id="season" onchange="loadSeasonal()">
+			<option value="">Select…</option>
+			<option value="winter">Winter 2025</option>
+			<option value="spring">Spring 2026</option>
+		</select>
+	</div>
+
+	<div id="seasonal-output" class="seasonal-list"></div>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
