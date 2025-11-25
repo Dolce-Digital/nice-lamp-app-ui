@@ -2,5 +2,8 @@
   "name": "nice-lamp-app-ui",
   "version": "1.0.0",
   "private": true,
-  "type": "commonjs"
+  "type": "commonjs",
+  "dependencies": {
+    "openai": "4.53.0"
+  }
 }
