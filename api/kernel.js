@@ -1,16 +1,23 @@
-import OpenAI from "openai";
+const OpenAI = require("openai");
 
-export default async function handler(req, res) {
+module.exports = async (req, res) => {
     if (req.method !== "POST") {
-        return res.status(405).json({ error: "Method not allowed" });
+        res.status(405).json({ error: "Method not allowed" });
+        return;
     }
 
     try {
-        const body = JSON.parse(req.body);
+        let body = {};
+
+        try {
+            body = JSON.parse(req.body);
+        } catch (err) {
+            return res.status(400).json({ error: "Invalid JSON body" });
+        }
 
         const { type, vibe, audience, occasion } = body;
 
-        const openai = new OpenAI({
+        const client = new OpenAI({
             apiKey: process.env.OPENAI_API_KEY
         });
 
@@ -30,16 +37,17 @@ Output:
 A full email with greeting, body, CTA line, and signature.
 `;
 
-        const completion = await openai.chat.completions.create({
+        const completion = await client.chat.completions.create({
             model: "gpt-4o-mini",
             messages: [{ role: "user", content: prompt }]
         });
 
         const emailText = completion.choices[0].message.content;
 
-        return res.status(200).json({ email: emailText });
+        res.status(200).json({ email: emailText });
 
     } catch (err) {
-        return res.status(500).json({ error: err.message });
+        res.status(500).json({ error: err.message });
     }
-}
+};
+
