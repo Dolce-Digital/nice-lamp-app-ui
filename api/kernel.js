@@ -1,26 +1,19 @@
-const OpenAI = require("openai");
+import OpenAI from "openai";
 
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
     if (req.method !== "POST") {
-        res.status(405).json({ error: "Method not allowed" });
-        return;
+        return res.status(405).json({ error: "Method not allowed" });
     }
 
     try {
-        let body = {};
+        const { type, vibe, audience, occasion } = req.body;
 
-        try {
-            body = JSON.parse(req.body);
-        } catch (err) {
-            return res.status(400).json({ error: "Invalid JSON body" });
-        }
-
-        const { type, vibe, audience, occasion } = body;
-
+        // Initialize OpenAI client
         const client = new OpenAI({
             apiKey: process.env.OPENAI_API_KEY
         });
 
+        // Build the prompt
         const prompt = `
 You are Nice-Lamp, a boutique-hospitality email engine.
 
@@ -37,17 +30,22 @@ Output:
 A full email with greeting, body, CTA line, and signature.
 `;
 
-        const completion = await client.chat.completions.create({
-            model: "gpt-4o-mini",
-            messages: [{ role: "user", content: prompt }]
+        // Call new Responses API (2025+)
+        const response = await client.responses.create({
+            model: "gpt-4.1-mini",
+            input: prompt
         });
 
-        const emailText = completion.choices[0].message.content;
+        // Extract text output safely
+        const emailText = response.output_text;
 
-        res.status(200).json({ email: emailText });
+        if (!emailText || emailText.trim() === "") {
+            return res.status(500).json({ error: "Engine returned empty output." });
+        }
+
+        return res.status(200).json({ email: emailText });
 
     } catch (err) {
-        res.status(500).json({ error: err.message });
+        return res.status(500).json({ error: err.message });
     }
-};
-
+}
