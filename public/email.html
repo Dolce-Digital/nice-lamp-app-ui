@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Create Email – Nice-Lamp</title>
+	<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header>
+	<h1>Nice-Lamp</h1>
+	<nav>
+		<a href="index.html">Home</a>
+		<a href="email.html" class="active">Create Email</a>
+		<a href="seasonal.html">Seasonal Packs</a>
+	</nav>
+</header>
+
+<main>
+	<h2>Create a New Email ✨</h2>
+
+	<p>Select the elements for your email:</p>
+
+	<div class="form-group">
+		<label>Email type</label>
+		<select id="type">
+			<option value="">Select…</option>
+			<option value="newsletter">Newsletter</option>
+			<option value="offer">Special Offer</option>
+			<option value="event">Event Announcement</option>
+			<option value="welcome">Welcome / Pre-stay</option>
+			<option value="poststay">Post-stay Thank You</option>
+		</select>
+	</div>
+
+	<div class="form-group">
+		<label>Hotel vibe</label>
+		<select id="vibe">
+			<option value="">Select…</option>
+			<option value="romantic">Romantic</option>
+			<option value="luxury">Luxury Chic</option>
+			<option value="family">Family-friendly</option>
+			<option value="business">Business & Corporate</option>
+		</select>
+	</div>
+
+	<div class="form-group">
+		<label>Guest audience</label>
+		<select id="audience">
+			<option value="">Select…</option>
+			<option value="couples">Couples</option>
+			<option value="families">Families</option>
+			<option value="locals">Local customers</option>
+			<option value="business">Business travellers</option>
+		</select>
+	</div>
+
+	<div class="form-group">
+		<label>Occasion</label>
+		<select id="occasion">
+			<option value="">Select…</option>
+			<option value="christmas">Christmas / Holidays</option>
+			<option value="weekend">Weekend Boost</option>
+			<option value="lowseason">Low-Season Recovery</option>
+			<option value="announcement">General Announcement</option>
+		</select>
+	</div>
+
+	<a class="btn pink" href="#" onclick="goToOutput()">Generate Email ✨</a>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
