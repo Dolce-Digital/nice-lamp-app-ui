@@ -19,42 +19,45 @@ function goToOutput() {
 }
 
 /* ----------------------------------------
-   OUTPUT PAGE GENERATION
+   OUTPUT PAGE — CALL REAL KERNEL ENGINE
 ---------------------------------------- */
 
-function generateDemoEmail(params) {
-	const type = params.get("type") || "email";
-	const vibe = params.get("vibe") || "boutique";
-	const audience = params.get("audience") || "guests";
-	const occasion = params.get("occasion") || "this moment";
-
-	return `
-Dear Guest,
-
-We are delighted to share something special with you today.
-
-As a ${vibe} property, we care deeply about creating meaningful experiences for ${audience}. 
-${occasion.charAt(0).toUpperCase() + occasion.slice(1)} is the perfect opportunity 
-to introduce a tailored ${type} crafted with warmth and elegance.
-
-More soon — your stay (and your inbox) deserves only the best.
-
-Warm regards,
-The Nice-Lamp Concierge Email App ✨
-	`;
-}
-
-function loadOutputIfNeeded() {
+async function loadOutputIfNeeded() {
 	const outputBox = document.getElementById("output-box");
 	if (!outputBox) return;
 
 	const params = new URLSearchParams(window.location.search);
-	const emailText = generateDemoEmail(params);
 
-	outputBox.textContent = emailText;
+	const type = params.get("type") || "";
+	const vibe = params.get("vibe") || "";
+	const audience = params.get("audience") || "";
+	const occasion = params.get("occasion") || "";
+
+	outputBox.textContent = "Generating email… please wait.";
+
+	try {
+		const response = await fetch("/api/kernel.js", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ type, vibe, audience, occasion })
+		});
+
+		const data = await response.json();
+
+		if (data.email) {
+			outputBox.textContent = data.email;
+		} else {
+			outputBox.textContent = "Error: No email returned by engine.";
+		}
+	} catch (err) {
+		outputBox.textContent = "Error contacting engine: " + err.message;
+	}
 }
 
-/* Copy button */
+/* ----------------------------------------
+   COPY BUTTON
+---------------------------------------- */
+
 function copyOutput() {
 	const outputBox = document.getElementById("output-box");
 	if (!outputBox) return;
